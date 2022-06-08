@@ -1,7 +1,6 @@
 package ru.olmart.hiber.service;
 
 import ru.olmart.hiber.dao.UserDao;
-import ru.olmart.hiber.model.Car;
 import ru.olmart.hiber.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,8 +16,8 @@ public class UserServiceImp implements UserService {
 
     @Transactional
     @Override
-    public void add(User user) {
-        userDao.add(user);
+    public void addUsers(User user) {
+        userDao.addUsers(user);
     }
 
     @Transactional(readOnly = true)

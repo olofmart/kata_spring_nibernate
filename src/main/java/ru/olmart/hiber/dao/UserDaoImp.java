@@ -1,12 +1,9 @@
 package ru.olmart.hiber.dao;
 
-import ru.olmart.hiber.model.Car;
 import ru.olmart.hiber.model.User;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
@@ -17,7 +14,7 @@ public class UserDaoImp implements UserDao {
     private SessionFactory sessionFactory;
 
     @Override
-    public void add(User user) {
+    public void addUsers(User user) {
         sessionFactory.getCurrentSession().save(user);
     }
 
@@ -31,7 +28,7 @@ public class UserDaoImp implements UserDao {
     @Override
     @SuppressWarnings("ALL")
     public List<User> getUsers(String carModel, int carSeries) {
-        TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery("from User where userCar in (from Car where model = :model and series = :series)");
+        TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery("from User where car in (from Car where model = :model and series = :series)");
         query.setParameter("model", carModel);
         query.setParameter("series", carSeries);;
         return query.getResultList();
